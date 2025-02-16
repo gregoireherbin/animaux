@@ -5,20 +5,28 @@ namespace App\DataFixtures;
 use App\Entity\Animal;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class AnimalFixtures extends Fixture
+
+class AnimalFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
         // $manager->persist($product);
 
+         // Récupérer les continents via leurs références
+         $afrique = $this->getReference(ContinentFixtures::AFRIQUE_REFERENCE);
+         $europe = $this->getReference(ContinentFixtures::EUROPE_REFERENCE);
+         $asie = $this->getReference(ContinentFixtures::ASIE_REFERENCE);
+
+
         $a1 = new Animal();
         $a1->setNom("Cochon")
             ->setPoids(50)
             ->setTaille(1)
-            ->setImage("cochon.png");
+            ->setImage("cochon.png")
+            ->addContinent($europe);
 
         $manager->persist($a1);
 
@@ -26,7 +34,9 @@ class AnimalFixtures extends Fixture
         $a2->setNom("Chien")
             ->setPoids(30)
             ->setTaille(1)
-            ->setImage("chien.png");
+            ->setImage("chien.png")
+            ->addContinent($europe);
+
 
         $manager->persist($a2);
 
@@ -34,10 +44,19 @@ class AnimalFixtures extends Fixture
         $a3->setNom("Requin")
             ->setPoids(400)
             ->setTaille(6)
-            ->setImage("requin.png");
+            ->setImage("requin.png")
+            ->addContinent($afrique);
+
 
         $manager->persist($a3);
 
         $manager->flush();
     }
+     // Assure que ContinentFixtures est exécuté avant AnimalFixtures
+     public function getDependencies()
+     {
+         return [
+             ContinentFixtures::class,
+         ];
+     }
 }

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnimalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
@@ -24,6 +26,14 @@ class Animal
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
+
+    #[ORM\ManyToMany(targetEntity: Continent::class, inversedBy: 'animals')]
+    private Collection $continents; // 🔹 Correction ici (au lieu de $relation)
+
+    public function __construct()
+    {
+        $this->continents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +84,30 @@ class Animal
     public function setImage(string $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Continent>
+     */
+    public function getContinents(): Collection
+    {
+        return $this->continents;
+    }
+
+    public function addContinent(Continent $continent): static
+    {
+        if (!$this->continents->contains($continent)) {
+            $this->continents->add($continent);
+        }
+
+        return $this;
+    }
+
+    public function removeContinent(Continent $continent): static
+    {
+        $this->continents->removeElement($continent); // 🔹 Correction ici
 
         return $this;
     }
