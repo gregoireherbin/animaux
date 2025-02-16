@@ -26,7 +26,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             ->setPoids(50)
             ->setTaille(1)
             ->setImage("cochon.png")
-            ->addContinent($europe);
+            ->addContinent($europe)
+            ->addContinent($asie);
 
         $manager->persist($a1);
 
@@ -45,7 +46,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             ->setPoids(400)
             ->setTaille(6)
             ->setImage("requin.png")
-            ->addContinent($afrique);
+            ->addContinent($afrique)
+            ->addContinent($europe);
 
 
         $manager->persist($a3);

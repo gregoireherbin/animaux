@@ -32,10 +32,12 @@
 						<th scope="col">Poids</th>
 						<th scope="col">Taille</th>
 						<th scope="col">Image</th>
+						<th scope="col">Continent</th>
 
 					</tr>
 				</thead>
 				<tbody>
+				
 					{% for animal in animaux %}
 						<tr>
 							<th scope="row">{{animal.id}}</th>
@@ -43,6 +45,11 @@
 							<td>{{animal.poids}}</td>
 							<td>{{animal.taille}}</td>
 							<td><img src="images/{{animal.image}}"></td>
+							<td>
+								{% for continent in animal.continents %}
+									<li>{{ continent.nom }}</li>
+								{% endfor %}
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>

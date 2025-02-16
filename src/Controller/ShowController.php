@@ -10,12 +10,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ShowController extends AbstractController
 {
-    #[Route('/show', name: 'app_show')]
+    #[Route('/', name: 'app_show')]
     public function index(EntityManagerInterface $entityManager)
     {
      $repository = $entityManager->getRepository(Animal::class); 
-     $animaux = $repository -> findAll(); 
-    //  var_dump($animaux);
+     $animaux = $repository -> findAll();
+
      return $this->render('base.html.twig', [
         "animaux"=>$animaux
      ]);
