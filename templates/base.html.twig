@@ -27,22 +27,17 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Nom</th>
-						<th scope="col">Poids</th>
-						<th scope="col">Taille</th>
 						<th scope="col">Image</th>
+						<th scope="col">Nom</th>
 
 					</tr>
 				</thead>
 				<tbody>
 					{% for animal in animaux %}
 						<tr>
-							<th scope="row">{{animal.id}}</th>
-							<td>{{animal.nom}}</td>
-							<td>{{animal.poids}}</td>
-							<td>{{animal.taille}}</td>
 							<td><img src="images/{{animal.image}}"></td>
+							<td><a href="{{path('afficher_animal',{'id':animal.id})}}">{{animal.nom}}</a></td>
+							<td>{{animal.famille}}</td>
 						</tr>
 					{% endfor %}
 				</tbody>

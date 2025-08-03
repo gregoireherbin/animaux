@@ -6,7 +6,7 @@ use App\Entity\Animal;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
+use FamilleFixtures;
 
 class AnimalFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -20,12 +20,17 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
          $europe = $this->getReference(ContinentFixtures::EUROPE_REFERENCE);
          $asie = $this->getReference(ContinentFixtures::ASIE_REFERENCE);
 
+         $famille1 = $this->getReference('famille_carnivores');
+         $famille2 = $this->getReference('famille_herbivores');
+         $famille3 = $this->getReference('famille_omnivores');
 
         $a1 = new Animal();
         $a1->setNom("Cochon")
             ->setPoids(50)
             ->setTaille(1)
             ->setImage("cochon.png")
+            ->setDangereux(false)
+            ->setFamille($famille1)
             ->addContinent($europe);
 
         $manager->persist($a1);
@@ -35,6 +40,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             ->setPoids(30)
             ->setTaille(1)
             ->setImage("chien.png")
+            ->setDangereux(false)
+            ->setFamille($famille2)
             ->addContinent($europe);
 
 
@@ -45,6 +52,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             ->setPoids(400)
             ->setTaille(6)
             ->setImage("requin.png")
+            ->setDangereux(true)
+            ->setFamille($famille3)
             ->addContinent($afrique);
 
 

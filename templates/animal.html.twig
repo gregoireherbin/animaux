@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<h1>{{animal.nom}}</h1>
+<img src="/images/{{animal.image}}">
+<p>Il pèse {{animal.poids}}</p>
+<p>Il mesure {{animal.taille}}</p>
+{% if animal.dangereux is same as (true) %}
+<p>l'animal est dangereux</p>
+{% else %}
+<p>l'animal n'est pas dangereux</p>
+{% endif %}
+{% endblock %}

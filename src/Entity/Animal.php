@@ -28,7 +28,14 @@ class Animal
     private ?string $image = null;
 
     #[ORM\ManyToMany(targetEntity: Continent::class, inversedBy: 'animals')]
-    private Collection $continents; // 🔹 Correction ici (au lieu de $relation)
+    private Collection $continents;
+
+    #[ORM\Column]
+    private ?bool $dangereux = null;
+
+    #[ORM\ManyToOne(inversedBy: 'relation')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Famille $famille = null; // 🔹 Correction ici (au lieu de $relation)
 
     public function __construct()
     {
@@ -108,6 +115,30 @@ class Animal
     public function removeContinent(Continent $continent): static
     {
         $this->continents->removeElement($continent); // 🔹 Correction ici
+
+        return $this;
+    }
+
+    public function isDangereux(): ?bool
+    {
+        return $this->dangereux;
+    }
+
+    public function setDangereux(bool $dangereux): static
+    {
+        $this->dangereux = $dangereux;
+
+        return $this;
+    }
+
+    public function getFamille(): ?Famille
+    {
+        return $this->famille;
+    }
+
+    public function setFamille(?Famille $famille): static
+    {
+        $this->famille = $famille;
 
         return $this;
     }
