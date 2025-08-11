@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AnimalRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnimalRepository::class)]
@@ -35,7 +36,10 @@ class Animal
 
     #[ORM\ManyToOne(inversedBy: 'relation')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Famille $famille = null; // 🔹 Correction ici (au lieu de $relation)
+    private ?Famille $famille = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $description = null; // 🔹 Correction ici (au lieu de $relation)
 
     public function __construct()
     {
@@ -139,6 +143,18 @@ class Animal
     public function setFamille(?Famille $famille): static
     {
         $this->famille = $famille;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
