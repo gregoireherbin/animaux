@@ -1,13 +1,32 @@
 {% extends "base.html.twig" %}
 {% block body %}
-<h1>{{animal.nom}}</h1>
-<img src="/images/{{animal.image}}">
-<p>Il pèse {{animal.poids}}</p>
-<p>Il mesure {{animal.taille}}</p>
-<p>L'amimal appartient à la famille des {{animal.famille}}</p>
-{% if animal.dangereux is same as (true) %}
-<p>l'animal est dangereux</p>
-{% else %}
-<p>l'animal n'est pas dangereux</p>
-{% endif %}
+	<div class="card mb-3" style="max-width: 540px;">
+		<div class="row g-0">
+			<div class="col-md-4 d-flex align-items-center justify-content-center">
+				<img src="{{asset('images/' ~ animal.image)}}" class="img-fluid rounded-start" alt="{{animal.nom}}">
+			</div>
+			<div class="col-md-8">
+				<div class="card-body">
+					<h5 class="card-title">{{animal.nom}}</h5>
+					<p class="card-text">
+						<strong>Famille :</strong>
+						{{animal.famille}}</p>
+					<p class="card-text">
+						<strong>Taille :</strong>
+						{{animal.taille}}
+						ans</p>
+					<p class="card-text">
+						<strong>Poids :</strong>
+						{{animal.poids}}
+						kg</p>
+					{# <p class="card-text">{{animal.description}}</p> #}
+					{% if animal.dangereux is same as (true) %}
+						<p>l'animal est dangereux</p>
+					{% else %}
+						<p>l'animal n'est pas dangereux</p>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}

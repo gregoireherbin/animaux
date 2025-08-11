@@ -1,0 +1,5 @@
+{
+    "[twig]": {
+        "editor.defaultFormatter": "mblode.twig-language-2"
+    }
+}

@@ -18,31 +18,30 @@
 
 
 		<!-- As a heading -->
-		<nav class="navbar bg-body-tertiary">
+		<nav class="navbar bg-success">
 			<div class="container-fluid">
 				<span class="navbar-brand mb-0 h1">Navbar</span>
 			</div>
 		</nav>
 		{% block body %}Liste des animaux :
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">Image</th>
-						<th scope="col">Nom</th>
 
-					</tr>
-				</thead>
-				<tbody>
-				
-					{% for animal in animaux %}
-						<tr>
-							<td><img src="images/{{animal.image}}"></td>
-							<td><a href="{{path('afficher_animal',{'id':animal.id})}}">{{animal.nom}}</a></td>
-							<td>{{animal.famille}}</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
+			<div class="container d-flex">
+				{% for animal in animaux %}
+					<div class="card mx-3" style="width: 18rem;">
+						<div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+							<img src="images/{{animal.image}}"  alt="{{animal.nom}}">
+						</div>
+						<div class="card-body">
+							<h5 class="card-title text-center">
+								<a href="{{path('afficher_animal',{'id':animal.id})}}">{{animal.nom}}</a>
+							</h5>
+							<p></p>
+							<a href="#" class="btn btn-primary w-100">{{animal.famille}}</a>
+						</div>
+					</div>
+
+				{% endfor %}
+			</div>
 		{% endblock %}
 
 

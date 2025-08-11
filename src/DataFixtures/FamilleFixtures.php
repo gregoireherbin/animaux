@@ -11,21 +11,21 @@ class FamilleFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $f1 = new Famille();
-        $f1 -> setLibelle("carnivores");
+        $f1 -> setLibelle("mammiferes");
         $f1 -> setDescription("des mangeurs de viandes");
-        $this->addReference('famille_carnivores', $f1);
+        $this->addReference('famille_mammiferes', $f1);
         $manager -> persist($f1);
 
         $f2 = new Famille();
-        $f2 -> setLibelle("herbivores");
+        $f2 -> setLibelle("reptiles");
         $f2 -> setDescription("des mangeurs de végétaux");
-        $this->addReference('famille_herbivores', $f2);
+        $this->addReference('famille_reptiles', $f2);
         $manager -> persist($f2);
 
         $f3 = new Famille();
-        $f3 -> setLibelle("omnivores");
+        $f3 -> setLibelle("poissons");
         $f3 -> setDescription("ils mangent de tout");
-        $this->addReference('famille_omnivores', $f3);
+        $this->addReference('famille_poissons', $f3);
         $manager -> persist($f3);
         
         
